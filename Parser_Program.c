@@ -239,5 +239,5 @@ void factor() {
     printf("Exit <factor>\n");
 }  /* End of function factor */
 void error() {
-    
+    printf("Error occured at '", lexeme, "'");
 }
