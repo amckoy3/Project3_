@@ -129,7 +129,10 @@ void getChar() {
         else charClass = UNKNOWN;
     }
     else
+    {
+        printf("-----New expression-----\n");
         charClass = EOF;
+    }
 }
 /*****************************************************/
 /* getNonBlank - a function to call getChar until it
