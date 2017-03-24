@@ -7,6 +7,7 @@
 //
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <ctype.h>
 
 /* Global declarations */
@@ -18,6 +19,10 @@ int lexLen;
 int token;
 int nextToken;
 FILE *in_fp, *fopen();
+ssize_t expression;
+size_t length=0;
+char * express = NULL;
+int lineCount =0;
 
 /* Function declarations */
 void addChar();
@@ -47,13 +52,21 @@ int main(int argc, char* argv[]) {
     /* Open the input data file and process its contents */
     const char *filename = argv[1];
     if ((in_fp = fopen("myfile.txt", "r")) == NULL)
-        printf("ERROR - cannot open file %s",filename); else {
+        printf("ERROR - cannot open file %s",filename);
+    else
+    {
+        while ((expression = getline(&express, &length, in_fp)) != EOF) //reads file by line based off the length
+        {
+            lineCount = 0;
             getChar();
-            do {
-                lex();
-                expr();
-            } while (nextToken != EOF);
+            if (express != NULL) {
+                do {
+                    lex();
+                    expr();
+                    } while (nextToken != EOF);
+            }
         }
+    }
 }
 
 /*****************************************************/
@@ -106,7 +119,9 @@ void addChar() {
 /* getChar - a function to get the next character of
  input and determine its character class */
 void getChar() {
-    if ((nextChar = getc(in_fp)) != EOF) {
+    if (express[lineCount] != '\n') {   //places characters into an array reading up to end of line
+        nextChar = express[lineCount++];
+    //if ((nextChar = getc(in_fp)) != EOF) {
         if (isalpha(nextChar))
             charClass = LETTER;
         else if (isdigit(nextChar))
@@ -239,5 +254,5 @@ void factor() {
     printf("Exit <factor>\n");
 }  /* End of function factor */
 void error() {
-    printf("Error occured at '", lexeme, "'");
+    printf("Error occured at %s \n", lexeme);
 }
