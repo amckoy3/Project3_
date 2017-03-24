@@ -24,6 +24,10 @@ void addChar();
 void getChar();
 void getNonBlank();
 int lex();
+void factor();
+void term();
+void expr();
+void error();
 /* Character classes */
 #define LETTER 0
 #define DIGIT 1
@@ -231,5 +235,8 @@ void factor() {
             error();
     }  /* End of else */
     
-    printf("Exit <factor>\n");;
+    printf("Exit <factor>\n");
 }  /* End of function factor */
+void error() {
+    
+}
