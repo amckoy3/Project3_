@@ -39,11 +39,10 @@ int lex();
 #define LEFT_PAREN 25
 #define RIGHT_PAREN 26
 
-int main() {
+int main(int argc, char* argv[]) {
     /* Open the input data file and process its contents */
-    char* argv[256];
-    const char *filename = argv[0];
-    if ((in_fp = fopen(filename, "r")) == NULL)
+    const char *filename = argv[1];
+    if ((in_fp = fopen("myfile.txt", "r")) == NULL)
         printf("ERROR - cannot open file %s",filename); else {
             getChar();
             do {
