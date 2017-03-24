@@ -51,7 +51,7 @@ void error();
 int main(int argc, char* argv[]) {
     /* Open the input data file and process its contents */
     const char *filename = argv[1];
-    if ((in_fp = fopen("myfile.txt", "r")) == NULL)
+    if ((in_fp = fopen(filename, "r")) == NULL)
         printf("ERROR - cannot open file %s",filename);
     else
     {
